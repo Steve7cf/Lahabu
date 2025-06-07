@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ms</title>
+    <link rel="stylesheet" href="CSS/global.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+  </head>
+
+  <style>
+    .sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      padding: 48px 0 0;
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-link {
+      color: #adb5bd;
+      margin-bottom: 5px;
+      border-radius: 5px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link i {
+      margin-right: 4px;
+      color: #6c757d;
+    }
+
+    .nav-link:hover i,
+    .nav-link.active i {
+      color: #fff;
+    }
+
+    .progress-circle {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      position: relative;
+      background-color: #f8f9fa;
+      border-radius: 50%;
+    }
+
+    .progress-circle-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0d6efd;
+    }
+
+    main {
+      margin-left: 280px; /* Adjust based on sidebar width */
+      padding-top: 1rem;
+    }
+
+    @media (max-width: 767.98px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      main {
+        margin-left: 0;
+      }
+    }
+  </style>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light py-3">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <div class="me-2 rounded-circle p-1" style="background-color: #d6d7d8;">
+        <img src="/images/hat.png" alt="logo" class="img-fluid" style="height: 30px;" />
+      </div>
+      <a class="navbar-brand fw-bold text-primary" href="/">
+        Juhudi Secondary School
+      </a>
+    </div>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center gap-3">
+        <li class="nav-item">
+          <a class="nav-link active" href="/" aria-current="page">
+            Home <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#features">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contacts">Contact</a>
+        </li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-primary text-white fw-bold px-3" href="/login">
+            Login
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  </body>
+</html>

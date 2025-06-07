@@ -1,0 +1,110 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: sans-serif;
+}
+body{
+    background-color: #ebeef1;
+}
+.hero{
+    display: grid;
+    height: 500px auto;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    align-items: center;
+}
+.image{
+    object-fit: contain;
+    width: 500px;
+}
+.cards{
+     display: grid;
+    height: 500px auto;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+}
+
+.card-one{
+    background-color: #ecf5fa;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 17px rgba(0,0,0,0.16);
+}
+
+.card-two{
+    background-color: #f1faf7;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 17px rgba(0,0,0,0.16);
+}
+
+.card-three{
+    background-color: #fff6ed;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 17px rgba(0,0,0,0.16);
+}
+.avatar{
+    background-color: #88aba0 ;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.avatar img{
+    width: 40px;
+}
+.card-avatar{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cbe5f2;
+    border-radius: 50%;
+}
+.card-avatar-two{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #91bfc5;
+    border-radius: 50%;
+}
+.card-avatar-three{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f49b78;
+    border-radius: 50%;
+}
+.card-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+/* #f69a7f check progress
+#88aba0 logo
+#ecf5fa card one
+#f0f9f7 card 2
+#ff6ed card 3
+#d0e9f4 button */
+
+/* form */
+.form-wrapper{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    height: 500px auto;
+    background-color: #ecf5fa;
+}
+.login-button{
+    background-color: #d0e9f4;
+}

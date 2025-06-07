@@ -1,0 +1,14 @@
+
+POST http://localhost:3000/signup/teacher
+Content-Type: application/json
+
+{
+    "firstName":"steve",
+    "lastName":"john",
+    "password":"123456",
+    "confirmPassword":"123456",
+    "email":"steve@juhudi.ac.tz",
+    "subject":"chemistry",
+    "role":"teacher",
+    "teacherId":"steve-0e4"
+}
