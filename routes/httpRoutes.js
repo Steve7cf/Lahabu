@@ -21,6 +21,11 @@ routes.get("/dashboard", authenticate(), (req, res) => {
   res.render("dashboard", { name: req.user.name, role: req.user.role });
 });
 
+// class management
+routes.get("/class-management", authenticate(), (req, res) => {
+  res.render("classManagement", { name: req.user.name, role: req.user.role });
+});
+
 
 // student endpoints
 routes.post("/signup/student", rest.registerStudent);
@@ -49,6 +54,9 @@ routes.get('/logout', (req, res) => {
         res.redirect('/login');
     });
 });
+
+// messages
+routes.post("/chats", rest.chats);
 
 module.exports = routes;
 

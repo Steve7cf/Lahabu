@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const studentModel = require("../model/student");
 const parentModel = require("../model/parent");
 const teacherModel = require("../model/teacher");
+const messageModel = require("../model/messages");
 
 // register student
 const registerStudent = async (req, res) => {
@@ -109,7 +110,7 @@ const registerParent = async (req, res) => {
 
 // register teacher
 const registerTeacher = async (req, res) => {
-  const role = "teacher"
+  const role = "teacher";
   const {
     firstName,
     lastName,
@@ -120,13 +121,15 @@ const registerTeacher = async (req, res) => {
     teacherId,
   } = req.body;
 
-  console.log(    firstName,
+  console.log(
+    firstName,
     lastName,
     email,
     password,
     confirmPassword,
     subject,
-    teacherId)
+    teacherId
+  );
   if (
     !firstName ||
     !lastName ||
@@ -140,7 +143,7 @@ const registerTeacher = async (req, res) => {
     return res.status(400).json({ message: "some fields are missing" });
   }
 
-   const salt = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
   try {
@@ -151,20 +154,22 @@ const registerTeacher = async (req, res) => {
       subject: subject,
       email: email,
       password: hashedPassword,
-      teacherId:teacherId,
-      role:role
+      teacherId: teacherId,
+      role: role,
     };
 
-    const teacherRecords = await teacherModel.create(teacherObj)
-    if(!teacherRecords) return res.status(500).json({ message: "Whoops! no records found!" });
+    const teacherRecords = await teacherModel.create(teacherObj);
+    if (!teacherRecords)
+      return res.status(500).json({ message: "Whoops! no records found!" });
 
-     res.status(201).redirect("/login");
+    res.status(201).redirect("/login");
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ message: "Whoops! internal server Errors" });
   }
 };
 
+// auth teacher
 const authTeacher = async (req, res) => {
   const role = "teacher";
   const { email, password } = req.body;
@@ -222,8 +227,7 @@ const authTeacher = async (req, res) => {
   }
 };
 
-// login user
-
+// login student
 const authStudent = async (req, res) => {
   const role = "student";
   const { studentID, password } = req.body;
@@ -238,7 +242,10 @@ const authStudent = async (req, res) => {
   }
 
   try {
-    const user = await studentModel.findOne({ studentId: studentID, role: role });
+    const user = await studentModel.findOne({
+      studentId: studentID,
+      role: role,
+    });
 
     if (!user) {
       return res.status(401).json({ message: "invalid student ID" });
@@ -340,11 +347,30 @@ const authParent = async (req, res) => {
   }
 };
 
+// messages
+const chats = async (req, res) => {
+  const { sender, message, receiver } = req.body;
+  try {
+    const messageObj = {
+      sender: sender,
+      message: message,
+      receiver: receiver,
+    };
+    const messageRec = await messageModel.create(messageObj);
+    if (!messageRec) return res.status(500).json({ message: "server error" });
+    res.status(201).json(messageRec)
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "server error" });
+  }
+};
+
 module.exports = {
   authStudent,
   registerStudent,
   registerParent,
   registerTeacher,
   authParent,
-  authTeacher
+  authTeacher,
+  chats,
 };
