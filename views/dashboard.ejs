@@ -6,7 +6,10 @@
     <title>Ms</title>
     <link rel="stylesheet" href="CSS/global.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
   </head>
 
@@ -85,13 +88,13 @@
       main {
         margin-left: 0;
       }
-      
+
       .mobile-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
-      
+
       .sidebar {
         display: none;
       }
@@ -104,42 +107,204 @@
     }
   </style>
   <body>
-<div class="container-fluid">
-  <div class="row">
-    <!-- Mobile Header (visible only on small screens) -->
-    <div class="mobile-header">
-      <h5 class="mb-0">Dashboard</h5>
-      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-        <i class="bi bi-list"></i> Menu
-      </button>
-    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Mobile Header (visible only on small screens) -->
+        <div class="mobile-header">
+          <h5 class="mb-0">Dashboard</h5>
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#sidebar"
+            aria-controls="sidebar"
+          >
+            <i class="bi bi-list"></i> Menu
+          </button>
+        </div>
 
-    <!-- Sidebar Navigation - Offcanvas for mobile -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sidebarLabel">Menu</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <div class="position-sticky pt-3">
-          <div class="text-center mb-4">
-            <% if(role === 'student') { %>
-               <img src="/images/student_avatar.png" class="rounded-circle" width="80" alt="User Avatar">
-            <%}%>
-           
-            <% if(role === 'parent') { %>
-               <img src="/images/parent_avatar.png" class="rounded-circle" width="80" alt="User Avatar">
-            <%}%>
-
-            <% if(role === 'teacher') { %>
-               <img src="/images/teacher_avatar.png" class="rounded-circle" width="80" alt="User Avatar">
-            <%}%>
-            <h5 class="text-white mt-2 mb-0"><%= name.toUpperCase() %></h5>
-            <small class="text-white"><%= role.toUpperCase() %></small>
+        <!-- Sidebar Navigation - Offcanvas for mobile -->
+        <div
+          class="offcanvas offcanvas-start"
+          tabindex="-1"
+          id="sidebar"
+          aria-labelledby="sidebarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarLabel">Menu</h5>
+            <button
+              type="button"
+              class="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
           </div>
-          
-          <ul class="nav flex-column">
-            <% if(role === 'student') { %>
+          <div class="offcanvas-body">
+            <div class="position-sticky pt-3">
+              <div class="text-center mb-4">
+                <% if(role === 'student') { %>
+                <img
+                  src="/images/student_avatar.png"
+                  class="rounded-circle"
+                  width="80"
+                  alt="User Avatar"
+                />
+                <%}%> <% if(role === 'parent') { %>
+                <img
+                  src="/images/parent_avatar.png"
+                  class="rounded-circle"
+                  width="80"
+                  alt="User Avatar"
+                />
+                <%}%> <% if(role === 'teacher') { %>
+                <img
+                  src="/images/teacher_avatar.png"
+                  class="rounded-circle"
+                  width="80"
+                  alt="User Avatar"
+                />
+                <%}%>
+                <h5 class="text-white mt-2 mb-0"><%= name.toUpperCase() %></h5>
+                <small class="text-white"><%= role.toUpperCase() %></small>
+              </div>
+
+              <ul class="nav flex-column">
+                <% if(role === 'student') { %>
+                <!-- Student Menu -->
+                <li class="nav-item">
+                  <a class="nav-link active" href="/dashboard">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/grades">
+                    <i class="bi bi-journal-bookmark me-2"></i> My Grades
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/attendance">
+                    <i class="bi bi-calendar-check me-2"></i> Attendance
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/timetable">
+                    <i class="bi bi-table me-2"></i> Timetable
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/assignments">
+                    <i class="bi bi-list-task me-2"></i> Assignments
+                  </a>
+                </li>
+
+                <% } else if(role === 'parent') { %>
+                <!-- Parent Menu -->
+                <li class="nav-item">
+                  <a class="nav-link active" href="/dashboard">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/child-progress">
+                    <i class="bi bi-graph-up me-2"></i> Child's Progress
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/attendance">
+                    <i class="bi bi-calendar-check me-2"></i> Attendance
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/messages">
+                    <i class="bi bi-chat-left-text me-2"></i> Teacher Messages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/school-events">
+                    <i class="bi bi-calendar-event me-2"></i> School Events
+                  </a>
+                </li>
+
+                <% } else if(role === 'teacher') { %>
+                <!-- Teacher Menu -->
+                <li class="nav-item">
+                  <a class="nav-link active" href="/dashboard">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/class-management">
+                    <i class="bi bi-people-fill me-2"></i> Class Management
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/gradebook">
+                    <i class="bi bi-journal-check me-2"></i> Gradebook
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/attendance">
+                    <i class="bi bi-calendar-check me-2"></i> Attendance
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/messages">
+                    <i class="bi bi-chat-left-text me-2"></i> Parent Messages
+                  </a>
+                </li>
+                <% } %>
+
+                <!-- Common Menu Items -->
+                <li class="nav-item">
+                  <a class="nav-link" href="/settings">
+                    <i class="bi bi-gear me-2"></i> Settings
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">
+                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regular Sidebar (visible on larger screens) -->
+        <nav
+          id="desktop-sidebar"
+          class="col-md-3 col-lg-2 d-none d-lg-block bg-dark sidebar"
+        >
+          <div class="position-sticky pt-3">
+            <div class="text-center mb-4">
+              <% if(role === 'student') { %>
+              <img
+                src="/images/student_avatar.png"
+                class="rounded-circle"
+                width="80"
+                alt="User Avatar"
+              />
+              <%}%> <% if(role === 'parent') { %>
+              <img
+                src="/images/parent_avatar.png"
+                class="rounded-circle"
+                width="80"
+                alt="User Avatar"
+              />
+              <%}%> <% if(role === 'teacher') { %>
+              <img
+                src="/images/teacher_avatar.png"
+                class="rounded-circle"
+                width="80"
+                alt="User Avatar"
+              />
+              <%}%>
+              <h5 class="text-white mt-2 mb-0"><%= name.toUpperCase() %></h5>
+              <small class="text-white"><%= role.toUpperCase() %></small>
+            </div>
+
+            <ul class="nav flex-column">
+              <% if(role === 'student') { %>
               <!-- Student Menu -->
               <li class="nav-item">
                 <a class="nav-link active" href="/dashboard">
@@ -166,8 +331,8 @@
                   <i class="bi bi-list-task me-2"></i> Assignments
                 </a>
               </li>
-              
-            <% } else if(role === 'parent') { %>
+
+              <% } else if(role === 'parent') { %>
               <!-- Parent Menu -->
               <li class="nav-item">
                 <a class="nav-link active" href="/dashboard">
@@ -194,8 +359,8 @@
                   <i class="bi bi-calendar-event me-2"></i> School Events
                 </a>
               </li>
-              
-            <% } else if(role === 'teacher') { %>
+
+              <% } else if(role === 'teacher') { %>
               <!-- Teacher Menu -->
               <li class="nav-item">
                 <a class="nav-link active" href="/dashboard">
@@ -222,850 +387,1184 @@
                   <i class="bi bi-chat-left-text me-2"></i> Parent Messages
                 </a>
               </li>
-            <% } %>
-            
-            <!-- Common Menu Items -->
-            <li class="nav-item">
-              <a class="nav-link" href="/settings">
-                <i class="bi bi-gear me-2"></i> Settings
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">
-                <i class="bi bi-box-arrow-right me-2"></i> Logout
-              </a>
-            </li>
-          </ul>
-        </div>
+              <% } %>
+
+              <!-- Common Menu Items -->
+              <li class="nav-item">
+                <a class="nav-link" href="/settings">
+                  <i class="bi bi-gear me-2"></i> Settings
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">
+                  <i class="bi bi-box-arrow-right me-2"></i> Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="h2">Dashboard</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  <i class="bi bi-calendar me-1"></i> <%= new
+                  Date().toLocaleDateString() %>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dashboard Content Based on Role -->
+          <% if(role === 'student') { %>
+          <!-- Student Dashboard -->
+          <div class="row">
+            <!-- Grades Summary -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-journal-bookmark me-2"></i> Academic Summary
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <div class="progress-circle" data-value="85">
+                      <span class="progress-circle-value">85%</span>
+                    </div>
+                    <h5 class="mt-3">Overall Average</h5>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-sm">
+                      <thead>
+                        <tr>
+                          <th>Subject</th>
+                          <th>Grade</th>
+                          <th>Progress</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if (grades && grades.length > 0) { %> <%
+                        grades.forEach(g => { %>
+                        <tr>
+                          <td><%= g.subject %></td>
+                          <td><%= g.grade || 'N/A' %></td>
+                          <td>
+                            <div class="progress" style="height: 10px">
+                              <div
+                                class="progress-bar <%= Number(g.progress) >= 80 ? 'bg-success' : Number(g.progress) >= 60 ? 'bg-info' : 'bg-warning' %>"
+                                style="width: 56%"
+                              ></div>
+                            </div>
+                          </td>
+                        </tr>
+                        <% }) %> <% } else { %>
+                        <tr>
+                          <td colspan="3" class="text-center">
+                            No grades available
+                          </td>
+                        </tr>
+                        <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upcoming Assignments -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div
+                  class="card-header bg-warning text-dark d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-list-task me-2"></i> Upcoming Assignments
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Math Homework</h6>
+                        <small class="text-danger">Due tomorrow</small>
+                      </div>
+                      <p class="mb-1">Chapter 5 Exercises</p>
+                      <small>Mathematics - Mr. Johnson</small>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Science Project</h6>
+                        <small class="text-warning">Due in 3 days</small>
+                      </div>
+                      <p class="mb-1">Solar System Model</p>
+                      <small>Science - Ms. Parker</small>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">English Essay</h6>
+                        <small class="text-primary">Due next week</small>
+                      </div>
+                      <p class="mb-1">Book Analysis: To Kill a Mockingbird</p>
+                      <small>English - Mrs. Smith</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Attendance Summary -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div
+                  class="card-header bg-info text-white d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-calendar-check me-2"></i> Attendance Summary
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <div class="row text-center">
+                    <div class="col-4">
+                      <h3 class="text-success">95%</h3>
+                      <small>Present</small>
+                    </div>
+                    <div class="col-4">
+                      <h3 class="text-warning">3%</h3>
+                      <small>Late</small>
+                    </div>
+                    <div class="col-4">
+                      <h3 class="text-danger">2%</h3>
+                      <small>Absent</small>
+                    </div>
+                  </div>
+                  <hr />
+                  <h6>Recent Absences:</h6>
+                  <ul class="list-unstyled">
+                    <li><i class="bi bi-dot"></i> March 15 - Sick</li>
+                    <li>
+                      <i class="bi bi-dot"></i> February 28 - Family Event
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timetable Preview -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-table me-2"></i> Today's Classes
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Mathematics</h6>
+                        <small>9:00 - 10:00</small>
+                      </div>
+                      <small>Room 201 - Mr. Johnson</small>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Science</h6>
+                        <small>10:15 - 11:15</small>
+                      </div>
+                      <small>Lab 3 - Ms. Parker</small>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">English</h6>
+                        <small>11:30 - 12:30</small>
+                      </div>
+                      <small>Room 105 - Mrs. Smith</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Assignment Modal for Student -->
+          <div
+            class="modal fade"
+            id="addAssignmentModal"
+            tabindex="-1"
+            aria-labelledby="addAssignmentModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addAssignmentModalLabel">
+                    Add New Assignment
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="assignmentTitle" class="form-label"
+                        >Assignment Title</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="assignmentTitle"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="assignmentSubject" class="form-label"
+                        >Subject</label
+                      >
+                      <select
+                        class="form-select"
+                        id="assignmentSubject"
+                        name="subject"
+                        required
+                      >
+                        <option value="" disabled selected>
+                          Select Subject
+                        </option>
+                        <% subjects.forEach(function(subject) { %>
+                        <option value="<%= subject._id %>">
+                          <%= subject.subject %> - <%= subject.subjectTeacher %>
+                        </option>
+                        <% }); %>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="assignmentDueDate" class="form-label"
+                        >Due Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="assignmentDueDate"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="assignmentDescription" class="form-label"
+                        >Description</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="assignmentDescription"
+                        rows="4"
+                      ></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Save Assignment
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Attendance Modal for Student -->
+          <div
+            class="modal fade"
+            id="addAttendanceModal"
+            tabindex="-1"
+            aria-labelledby="addAttendanceModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addAttendanceModalLabel">
+                    Report Absence
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="attendanceDate" class="form-label"
+                        >Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="attendanceDate"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="attendanceReason" class="form-label"
+                        >Reason</label
+                      >
+                      <select
+                        class="form-select"
+                        id="attendanceReason"
+                        required
+                      >
+                        <option value="" disabled selected>
+                          Select Reason
+                        </option>
+                        <option value="Sick">Sick</option>
+                        <option value="Family Event">Family Event</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="attendanceNote" class="form-label"
+                        >Additional Notes</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="attendanceNote"
+                        rows="4"
+                      ></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Submit Report
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <% } else if(role === 'parent') { %>
+          <!-- Parent Dashboard -->
+          <div class="row">
+            <!-- Child Summary -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-person-video2 me-2"></i> Child Summary
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <img
+                      src="/images/student-avatar.jpg"
+                      class="rounded-circle mb-2"
+                      width="80"
+                      alt="Child Avatar"
+                    />
+                    <h5>Emily Rodriguez</h5>
+                    <p class="text-muted">Grade 10 - Class B</p>
+                  </div>
+                  <div class="row text-center">
+                    <div class="col-4">
+                      <h4 class="text-primary">85%</h4>
+                      <small>Average Grade</small>
+                    </div>
+                    <div class="col-4">
+                      <h4 class="text-success">94%</h4>
+                      <small>Attendance</small>
+                    </div>
+                    <div class="col-4">
+                      <h4 class="text-warning">3</h4>
+                      <small>Pending Assignments</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Grades -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-journal-bookmark me-2"></i> Recent Grades
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-sm">
+                      <thead>
+                        <tr>
+                          <th>Subject</th>
+                          <th>Assignment</th>
+                          <th>Grade</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Mathematics</td>
+                          <td>Algebra Test</td>
+                          <td class="text-success">A</td>
+                        </tr>
+                        <tr>
+                          <td>Science</td>
+                          <td>Chemistry Quiz</td>
+                          <td class="text-info">B+</td>
+                        </tr>
+                        <tr>
+                          <td>English</td>
+                          <td>Essay Draft</td>
+                          <td class="text-success">A-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Teacher Messages -->
+            <div class="col-md-12 mb-4">
+              <div class="card h-100">
+                <div
+                  class="card-header bg-warning text-dark d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-chat-left-text me-2"></i> Teacher Messages
+                  </h5>
+                  <button
+                    class="btn btn-sm btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addMessageModal"
+                  >
+                    <i class="bi bi-plus-circle me-1"></i> New Message
+                  </button>
+                </div>
+                <div class="card-body">
+                  <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Mr. Johnson - Mathematics</h6>
+                        <small>2 days ago</small>
+                      </div>
+                      <p class="mb-1">
+                        Emily is doing well in algebra but could benefit from
+                        extra practice with quadratic equations.
+                      </p>
+                      <button
+                        class="btn btn-sm btn-outline-primary mt-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#replyMessageModal"
+                      >
+                        Reply
+                      </button>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Ms. Parker - Science</h6>
+                        <small>1 week ago</small>
+                      </div>
+                      <p class="mb-1">
+                        Reminder: Science project due next Tuesday. Emily has
+                        selected a great topic!
+                      </p>
+                      <button
+                        class="btn btn-sm btn-outline-primary mt-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#replyMessageModal"
+                      >
+                        Reply
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- New Message Modal for Parent -->
+            <div
+              class="modal fade"
+              id="addMessageModal"
+              tabindex="-1"
+              aria-labelledby="addMessageModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addMessageModalLabel">
+                      New Message
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="mb-3">
+                        <label for="messageRecipient" class="form-label"
+                          >Recipient</label
+                        >
+                        <select
+                          class="form-select"
+                          id="assignmentSubject"
+                          name="subject"
+                          required
+                        >
+                          <option value="" disabled selected>
+                            Select Subject
+                          </option>
+                          <% subjects.forEach(function(subject) { %>
+                          <option value="<%= subject._id %>">
+                            <%= subject.subject %> - <%= subject.subjectTeacher
+                            %>
+                          </option>
+                          <% }); %>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="messageSubject" class="form-label"
+                          >Subject</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="messageSubject"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="messageContent" class="form-label"
+                          >Message</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="messageContent"
+                          rows="5"
+                          required
+                        ></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Send Message
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reply Message Modal for Parent -->
+            <div
+              class="modal fade"
+              id="replyMessageModal"
+              tabindex="-1"
+              aria-labelledby="replyMessageModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="replyMessageModalLabel">
+                      Reply to Message
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="mb-3">
+                        <label for="replyRecipient" class="form-label"
+                          >Recipient</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="replyRecipient"
+                          readonly
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="replyContent" class="form-label"
+                          >Reply</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="replyContent"
+                          rows="5"
+                          required
+                        ></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Send Reply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <% } else if(role === 'teacher') { %>
+          <!-- Teacher Dashboard -->
+          <div class="row">
+            <!-- Class Summary -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-people-fill me-2"></i> Class Summary
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <h5>Grade 10 Mathematics - Section A</h5>
+                  <p class="text-muted">25 students | Mon/Wed/Fri 9:00-10:00</p>
+                  <hr />
+                  <div class="row text-center">
+                    <div class="col-4">
+                      <h4 class="text-primary">84%</h4>
+                      <small>Class Average</small>
+                    </div>
+                    <div class="col-4">
+                      <h4 class="text-success">92%</h4>
+                      <small>Attendance</small>
+                    </div>
+                    <div class="col-4">
+                      <h4 class="text-warning">5</h4>
+                      <small>Late Assignments</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upcoming Lessons -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div
+                  class="card-header bg-info text-white d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-journal-bookmark me-2"></i> Upcoming Lessons
+                  </h5>
+                  <button
+                    class="btn btn-sm btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addLessonModal"
+                  >
+                    <i class="bi bi-plus-circle me-1"></i> Add Lesson
+                  </button>
+                </div>
+                <div class="card-body">
+                  <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Quadratic Equations</h6>
+                        <small>Today, 9:00 AM</small>
+                      </div>
+                      <p class="mb-1">Room 201</p>
+                      <small>Materials: Textbook Chapter 5, Worksheet 3</small>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Polynomial Functions</h6>
+                        <small>Wednesday, 9:00 AM</small>
+                      </div>
+                      <p class="mb-1">Room 201</p>
+                      <small>Materials: Graphing calculators needed</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gradebook Alerts -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div
+                  class="card-header bg-warning text-dark d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-exclamation-triangle me-2"></i> Gradebook
+                    Alerts
+                  </h5>
+                  <button
+                    class="btn btn-sm btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addGradeModal"
+                  >
+                    <i class="bi bi-plus-circle me-1"></i> Add Grade
+                  </button>
+                </div>
+                <div class="card-body">
+                  <div class="alert alert-warning">
+                    <h6><i class="bi bi-person me-2"></i> David Miller</h6>
+                    <p>Grade dropped 15% in last 2 assignments</p>
+                    <button class="btn btn-sm btn-outline-dark">
+                      View Details
+                    </button>
+                  </div>
+                  <div class="alert alert-info">
+                    <h6><i class="bi bi-person me-2"></i> Sarah Johnson</h6>
+                    <p>Consistently scoring 95%+ - Consider advanced work</p>
+                    <button class="btn btn-sm btn-outline-dark">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Parent Messages -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div
+                  class="card-header bg-success text-white d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="card-title mb-0">
+                    <i class="bi bi-chat-left-text me-2"></i> Parent Messages
+                  </h5>
+                  <button
+                    class="btn btn-sm btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addMessageModal"
+                  >
+                    <i class="bi bi-plus-circle me-1"></i> New Message
+                  </button>
+                </div>
+                <div class="card-body">
+                  <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Mrs. Rodriguez</h6>
+                        <small>Yesterday</small>
+                      </div>
+                      <p class="mb-1">Regarding Emily's algebra performance</p>
+                      <button
+                        class="btn btn-sm btn-outline-success mt-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#replyMessageModal"
+                      >
+                        Reply
+                      </button>
+                    </div>
+                    <div class="list-group-item">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Mr. Chen</h6>
+                        <small>3 days ago</small>
+                      </div>
+                      <p class="mb-1">Question about upcoming test</p>
+                      <button
+                        class="btn btn-sm btn-outline-success mt-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#replyMessageModal"
+                      >
+                        Reply
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add Lesson Modal for Teacher -->
+            <div
+              class="modal fade"
+              id="addLessonModal"
+              tabindex="-1"
+              aria-labelledby="addLessonModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addLessonModalLabel">
+                      Add New Lesson
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="mb-3">
+                        <label for="lessonTitle" class="form-label"
+                          >Lesson Title</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lessonTitle"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="lessonDate" class="form-label">Date</label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="lessonDate"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="lessonTime" class="form-label">Time</label>
+                        <input
+                          type="time"
+                          class="form-control"
+                          id="lessonTime"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="lessonRoom" class="form-label">Room</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lessonRoom"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="lessonMaterials" class="form-label"
+                          >Materials</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="lessonMaterials"
+                          rows="4"
+                        ></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Save Lesson
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add Grade Modal for Teacher -->
+            <div
+              class="modal fade"
+              id="addGradeModal"
+              tabindex="-1"
+              aria-labelledby="addGradeModalLabel"
+              aria-hidden="true"
+            >
+              <form method="post" action="/student/grade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="addGradeModalLabel">
+                        Add New Grade
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label for="gradeStudent" class="form-label"
+                          >Student</label
+                        >
+                        <select
+                          id="gradeStudent"
+                          name="studentId"
+                          class="form-control"
+                        >
+                          <% students.forEach(student => { %>
+                          <option value="<%= student.studentId %>">
+                            <%= student.studentId %>
+                          </option>
+                          <% }); %>
+                        </select>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="examType" class="form-label">Exam</label>
+                        <select
+                          id="examType"
+                          name="examType"
+                          class="form-control"
+                        >
+                          <option value="midterm">Midterm</option>
+                          <option value="End term">End term</option>
+                          <option value="Annual">Annual</option>
+                          <option value="Assignment">Assignment</option>
+                          <option value="Quiz">Quiz</option>
+                        </select>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <select
+                          class="form-select"
+                          id="subject"
+                          name="subject"
+                          required
+                        >
+                          <option value="" disabled selected>
+                            Select Subject
+                          </option>
+                          <% subjects.forEach(function(subject) { %>
+                          <option value="<%= subject.subject %>">
+                            <%= subject.subject %>
+                          </option>
+                          <% }); %>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="gradeValue" class="form-label">Grade</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="gradeValue"
+                          name="grade"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Save Grade
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- New Message Modal for Teacher -->
+            <div
+              class="modal fade"
+              id="addMessageModal"
+              tabindex="-1"
+              aria-labelledby="addMessageModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addMessageModalLabel">
+                      New Message
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="mb-3">
+                        <label for="messageRecipient" class="form-label"
+                          >Recipient</label
+                        >
+                        <select
+                          class="form-select"
+                          id="messageRecipient"
+                          required
+                        >
+                          <option value="" disabled selected>
+                            Select Parent
+                          </option>
+                          <option value="Mrs. Rodriguez">Mrs. Rodriguez</option>
+                          <option value="Mr. Chen">Mr. Chen</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="messageSubject" class="form-label"
+                          >Subject</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="messageSubject"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="messageContent" class="form-label"
+                          >Message</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="messageContent"
+                          rows="5"
+                          required
+                        ></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Send Message
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reply Message Modal for Teacher -->
+            <div
+              class="modal fade"
+              id="replyMessageModal"
+              tabindex="-1"
+              aria-labelledby="replyMessageModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="replyMessageModalLabel">
+                      Reply to Message
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="mb-3">
+                        <label for="replyRecipient" class="form-label"
+                          >Recipient</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="replyRecipient"
+                          readonly
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="replyContent" class="form-label"
+                          >Reply</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="replyContent"
+                          rows="5"
+                          required
+                        ></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Send Reply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </main>
       </div>
     </div>
 
-    <!-- Regular Sidebar (visible on larger screens) -->
-    <nav id="desktop-sidebar" class="col-md-3 col-lg-2 d-none d-lg-block bg-dark sidebar">
-      <div class="position-sticky pt-3">
-        <div class="text-center mb-4">
-          <% if(role === 'student') { %>
-             <img src="/images/student_avatar.png" class="rounded-circle" width="80" alt="User Avatar">
-          <%}%>
-         
-          <% if(role === 'parent') { %>
-             <img src="/images/parent_avatar.png" class="rounded-circle" width="80" alt="User Avatar">
-          <%}%>
+    <%- include('partials/footer.ejs'); %>
 
-          <% if(role === 'teacher') { %>
-             <img src="/images/teacher_avatar.png" class="rounded-circle" width="80" alt="User Avatar">
-          <%}%>
-          <h5 class="text-white mt-2 mb-0"><%= name.toUpperCase() %></h5>
-          <small class="text-white"><%= role.toUpperCase() %></small>
-        </div>
-        
-        <ul class="nav flex-column">
-          <% if(role === 'student') { %>
-            <!-- Student Menu -->
-            <li class="nav-item">
-              <a class="nav-link active" href="/dashboard">
-                <i class="bi bi-speedometer2 me-2"></i> Dashboard
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/grades">
-                <i class="bi bi-journal-bookmark me-2"></i> My Grades
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/attendance">
-                <i class="bi bi-calendar-check me-2"></i> Attendance
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/timetable">
-                <i class="bi bi-table me-2"></i> Timetable
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/assignments">
-                <i class="bi bi-list-task me-2"></i> Assignments
-              </a>
-            </li>
-            
-          <% } else if(role === 'parent') { %>
-            <!-- Parent Menu -->
-            <li class="nav-item">
-              <a class="nav-link active" href="/dashboard">
-                <i class="bi bi-speedometer2 me-2"></i> Dashboard
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/child-progress">
-                <i class="bi bi-graph-up me-2"></i> Child's Progress
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/attendance">
-                <i class="bi bi-calendar-check me-2"></i> Attendance
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/messages">
-                <i class="bi bi-chat-left-text me-2"></i> Teacher Messages
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/school-events">
-                <i class="bi bi-calendar-event me-2"></i> School Events
-              </a>
-            </li>
-            
-          <% } else if(role === 'teacher') { %>
-            <!-- Teacher Menu -->
-            <li class="nav-item">
-              <a class="nav-link active" href="/dashboard">
-                <i class="bi bi-speedometer2 me-2"></i> Dashboard
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/class-management">
-                <i class="bi bi-people-fill me-2"></i> Class Management
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/gradebook">
-                <i class="bi bi-journal-check me-2"></i> Gradebook
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/attendance">
-                <i class="bi bi-calendar-check me-2"></i> Attendance
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/messages">
-                <i class="bi bi-chat-left-text me-2"></i> Parent Messages
-              </a>
-            </li>
-          <% } %>
-          
-          <!-- Common Menu Items -->
-          <li class="nav-item">
-            <a class="nav-link" href="/settings">
-              <i class="bi bi-gear me-2"></i> Settings
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">
-              <i class="bi bi-box-arrow-right me-2"></i> Logout
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-              <i class="bi bi-calendar me-1"></i> <%= new Date().toLocaleDateString() %>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dashboard Content Based on Role -->
-      <% if(role === 'student') { %>
-        <!-- Student Dashboard -->
-        <div class="row">
-          <!-- Grades Summary -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-primary text-white">
-                <h5 class="card-title mb-0"><i class="bi bi-journal-bookmark me-2"></i> Academic Summary</h5>
-              </div>
-              <div class="card-body">
-                <div class="text-center mb-3">
-                  <div class="progress-circle" data-value="85">
-                    <span class="progress-circle-value">85%</span>
-                  </div>
-                  <h5 class="mt-3">Overall Average</h5>
-                </div>
-                <div class="table-responsive">
-                  <table class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th>Subject</th>
-                        <th>Grade</th>
-                        <th>Progress</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Mathematics</td>
-                        <td>A</td>
-                        <td>
-                          <div class="progress" style="height: 10px;">
-                            <div class="progress-bar bg-success" style="width: 90%"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Science</td>
-                        <td>B+</td>
-                        <td>
-                          <div class="progress" style="height: 10px;">
-                            <div class="progress-bar bg-info" style="width: 85%"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>English</td>
-                        <td>A-</td>
-                        <td>
-                          <div class="progress" style="height: 10px;">
-                            <div class="progress-bar bg-success" style="width: 88%"></div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Upcoming Assignments -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0"><i class="bi bi-list-task me-2"></i> Upcoming Assignments</h5>
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addAssignmentModal">
-                  <i class="bi bi-plus-circle me-1"></i> Add Assignment
-                </button>
-              </div>
-              <div class="card-body">
-                <div class="list-group list-group-flush">
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Math Homework</h6>
-                      <small class="text-danger">Due tomorrow</small>
-                    </div>
-                    <p class="mb-1">Chapter 5 Exercises</p>
-                    <small>Mathematics - Mr. Johnson</small>
-                  </div>
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Science Project</h6>
-                      <small class="text-warning">Due in 3 days</small>
-                    </div>
-                    <p class="mb-1">Solar System Model</p>
-                    <small>Science - Ms. Parker</small>
-                  </div>
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">English Essay</h6>
-                      <small class="text-primary">Due next week</small>
-                    </div>
-                    <p class="mb-1">Book Analysis: To Kill a Mockingbird</p>
-                    <small>English - Mrs. Smith</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Attendance Summary -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0"><i class="bi bi-calendar-check me-2"></i> Attendance Summary</h5>
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addAttendanceModal">
-                  <i class="bi bi-plus-circle me-1"></i> Add Attendance
-                </button>
-              </div>
-              <div class="card-body">
-                <div class="row text-center">
-                  <div class="col-4">
-                    <h3 class="text-success">95%</h3>
-                    <small>Present</small>
-                  </div>
-                  <div class="col-4">
-                    <h3 class="text-warning">3%</h3>
-                    <small>Late</small>
-                  </div>
-                  <div class="col-4">
-                    <h3 class="text-danger">2%</h3>
-                    <small>Absent</small>
-                  </div>
-                </div>
-                <hr>
-                <h6>Recent Absences:</h6>
-                <ul class="list-unstyled">
-                  <li><i class="bi bi-dot"></i> March 15 - Sick</li>
-                  <li><i class="bi bi-dot"></i> February 28 - Family Event</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timetable Preview -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-success text-white">
-                <h5 class="card-title mb-0"><i class="bi bi-table me-2"></i> Today's Classes</h5>
-              </div>
-              <div class="card-body">
-                <div class="list-group list-group-flush">
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Mathematics</h6>
-                      <small>9:00 - 10:00</small>
-                    </div>
-                    <small>Room 201 - Mr. Johnson</small>
-                  </div>
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Science</h6>
-                      <small>10:15 - 11:15</small>
-                    </div>
-                    <small>Lab 3 - Ms. Parker</small>
-                  </div>
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">English</h6>
-                      <small>11:30 - 12:30</small>
-                    </div>
-                    <small>Room 105 - Mrs. Smith</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add Assignment Modal for Student -->
-        <div class="modal fade" id="addAssignmentModal" tabindex="-1" aria-labelledby="addAssignmentModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="addAssignmentModalLabel">Add New Assignment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="mb-3">
-                    <label for="assignmentTitle" class="form-label">Assignment Title</label>
-                    <input type="text" class="form-control" id="assignmentTitle" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="assignmentSubject" class="form-label">Subject</label>
-                    <select class="form-select" id="assignmentSubject" required>
-                      <option value="" disabled selected>Select Subject</option>
-                      <option value="Mathematics">Mathematics</option>
-                      <option value="Science">Science</option>
-                      <option value="English">English</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="assignmentDueDate" class="form-label">Due Date</label>
-                    <input type="date" class="form-control" id="assignmentDueDate" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="assignmentDescription" class="form-label">Description</label>
-                    <textarea class="form-control" id="assignmentDescription" rows="4"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save Assignment</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add Attendance Modal for Student -->
-        <div class="modal fade" id="addAttendanceModal" tabindex="-1" aria-labelledby="addAttendanceModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="addAttendanceModalLabel">Report Absence</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="mb-3">
-                    <label for="attendanceDate" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="attendanceDate" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="attendanceReason" class="form-label">Reason</label>
-                    <select class="form-select" id="attendanceReason" required>
-                      <option value="" disabled selected>Select Reason</option>
-                      <option value="Sick">Sick</option>
-                      <option value="Family Event">Family Event</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="attendanceNote" class="form-label">Additional Notes</label>
-                    <textarea class="form-control" id="attendanceNote" rows="4"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit Report</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <% } else if(role === 'parent') { %>
-        <!-- Parent Dashboard -->
-        <div class="row">
-          <!-- Child Summary -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-primary text-white">
-                <h5 class="card-title mb-0"><i class="bi bi-person-video2 me-2"></i> Child Summary</h5>
-              </div>
-              <div class="card-body">
-                <div class="text-center mb-3">
-                  <img src="/images/student-avatar.jpg" class="rounded-circle mb-2" width="80" alt="Child Avatar">
-                  <h5>Emily Rodriguez</h5>
-                  <p class="text-muted">Grade 10 - Class B</p>
-                </div>
-                <div class="row text-center">
-                  <div class="col-4">
-                    <h4 class="text-primary">85%</h4>
-                    <small>Average Grade</small>
-                  </div>
-                  <div class="col-4">
-                    <h4 class="text-success">94%</h4>
-                    <small>Attendance</small>
-                  </div>
-                  <div class="col-4">
-                    <h4 class="text-warning">3</h4>
-                    <small>Pending Assignments</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recent Grades -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-info text-white">
-                <h5 class="card-title mb-0"><i class="bi bi-journal-bookmark me-2"></i> Recent Grades</h5>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th>Subject</th>
-                        <th>Assignment</th>
-                        <th>Grade</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Mathematics</td>
-                        <td>Algebra Test</td>
-                        <td class="text-success">A</td>
-                      </tr>
-                      <tr>
-                        <td>Science</td>
-                        <td>Chemistry Quiz</td>
-                        <td class="text-info">B+</td>
-                      </tr>
-                      <tr>
-                        <td>English</td>
-                        <td>Essay Draft</td>
-                        <td class="text-success">A-</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Teacher Messages -->
-          <div class="col-md-12 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0"><i class="bi bi-chat-left-text me-2"></i> Teacher Messages</h5>
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMessageModal">
-                  <i class="bi bi-plus-circle me-1"></i> New Message
-                </button>
-              </div>
-              <div class="card-body">
-                <div class="list-group list-group-flush">
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Mr. Johnson - Mathematics</h6>
-                      <small>2 days ago</small>
-                    </div>
-                    <p class="mb-1">Emily is doing well in algebra but could benefit from extra practice with quadratic equations.</p>
-                    <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#replyMessageModal">Reply</button>
-                  </div>
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Ms. Parker - Science</h6>
-                      <small>1 week ago</small>
-                    </div>
-                    <p class="mb-1">Reminder: Science project due next Tuesday. Emily has selected a great topic!</p>
-                    <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#replyMessageModal">Reply</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- New Message Modal for Parent -->
-          <div class="modal fade" id="addMessageModal" tabindex="-1" aria-labelledby="addMessageModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addMessageModalLabel">New Message</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="messageRecipient" class="form-label">Recipient</label>
-                      <select class="form-select" id="messageRecipient" required>
-                        <option value="" disabled selected>Select Teacher</option>
-                        <option value="Mr. Johnson">Mr. Johnson - Mathematics</option>
-                        <option value="Ms. Parker">Ms. Parker - Science</option>
-                        <option value="Mrs. Smith">Mrs. Smith - English</option>
-                      </select>
-                    </div>
-                    <div class="mb-3">
-                      <label for="messageSubject" class="form-label">Subject</label>
-                      <input type="text" class="form-control" id="messageSubject" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="messageContent" class="form-label">Message</label>
-                      <textarea class="form-control" id="messageContent" rows="5" required></textarea>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Send Message</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Reply Message Modal for Parent -->
-          <div class="modal fade" id="replyMessageModal" tabindex="-1" aria-labelledby="replyMessageModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="replyMessageModalLabel">Reply to Message</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="replyRecipient" class="form-label">Recipient</label>
-                      <input type="text" class="form-control" id="replyRecipient" readonly>
-                    </div>
-                    <div class="mb-3">
-                      <label for="replyContent" class="form-label">Reply</label>
-                      <textarea class="form-control" id="replyContent" rows="5" required></textarea>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Send Reply</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <% } else if(role === 'teacher') { %>
-        <!-- Teacher Dashboard -->
-        <div class="row">
-          <!-- Class Summary -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-primary text-white">
-                <h5 class="card-title mb-0"><i class="bi bi-people-fill me-2"></i> Class Summary</h5>
-              </div>
-              <div class="card-body">
-                <h5>Grade 10 Mathematics - Section A</h5>
-                <p class="text-muted">25 students | Mon/Wed/Fri 9:00-10:00</p>
-                <hr>
-                <div class="row text-center">
-                  <div class="col-4">
-                    <h4 class="text-primary">84%</h4>
-                    <small>Class Average</small>
-                  </div>
-                  <div class="col-4">
-                    <h4 class="text-success">92%</h4>
-                    <small>Attendance</small>
-                  </div>
-                  <div class="col-4">
-                    <h4 class="text-warning">5</h4>
-                    <small>Late Assignments</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Upcoming Lessons -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0"><i class="bi bi-journal-bookmark me-2"></i> Upcoming Lessons</h5>
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addLessonModal">
-                  <i class="bi bi-plus-circle me-1"></i> Add Lesson
-                </button>
-              </div>
-              <div class="card-body">
-                <div class="list-group list-group-flush">
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Quadratic Equations</h6>
-                      <small>Today, 9:00 AM</small>
-                    </div>
-                    <p class="mb-1">Room 201</p>
-                    <small>Materials: Textbook Chapter 5, Worksheet 3</small>
-                  </div>
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Polynomial Functions</h6>
-                      <small>Wednesday, 9:00 AM</small>
-                    </div>
-                    <p class="mb-1">Room 201</p>
-                    <small>Materials: Graphing calculators needed</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gradebook Alerts -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0"><i class="bi bi-exclamation-triangle me-2"></i> Gradebook Alerts</h5>
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addGradeModal">
-                  <i class="bi bi-plus-circle me-1"></i> Add Grade
-                </button>
-              </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <h6><i class="bi bi-person me-2"></i> David Miller</h6>
-                  <p>Grade dropped 15% in last 2 assignments</p>
-                  <button class="btn btn-sm btn-outline-dark">View Details</button>
-                </div>
-                <div class="alert alert-info">
-                  <h6><i class="bi bi-person me-2"></i> Sarah Johnson</h6>
-                  <p>Consistently scoring 95%+ - Consider advanced work</p>
-                  <button class="btn btn-sm btn-outline-dark">View Details</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Parent Messages -->
-          <div class="col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0"><i class="bi bi-chat-left-text me-2"></i> Parent Messages</h5>
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMessageModal">
-                  <i class="bi bi-plus-circle me-1"></i> New Message
-                </button>
-              </div>
-              <div class="card-body">
-                <div class="list-group list-group-flush">
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Mrs. Rodriguez</h6>
-                      <small>Yesterday</small>
-                    </div>
-                    <p class="mb-1">Regarding Emily's algebra performance</p>
-                    <button class="btn btn-sm btn-outline-success mt-2" data-bs-toggle="modal" data-bs-target="#replyMessageModal">Reply</button>
-                  </div>
-                  <div class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">Mr. Chen</h6>
-                      <small>3 days ago</small>
-                    </div>
-                    <p class="mb-1">Question about upcoming test</p>
-                    <button class="btn btn-sm btn-outline-success mt-2" data-bs-toggle="modal" data-bs-target="#replyMessageModal">Reply</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Add Lesson Modal for Teacher -->
-          <div class="modal fade" id="addLessonModal" tabindex="-1" aria-labelledby="addLessonModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addLessonModalLabel">Add New Lesson</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="lessonTitle" class="form-label">Lesson Title</label>
-                      <input type="text" class="form-control" id="lessonTitle" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="lessonDate" class="form-label">Date</label>
-                      <input type="date" class="form-control" id="lessonDate" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="lessonTime" class="form-label">Time</label>
-                      <input type="time" class="form-control" id="lessonTime" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="lessonRoom" class="form-label">Room</label>
-                      <input type="text" class="form-control" id="lessonRoom" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="lessonMaterials" class="form-label">Materials</label>
-                      <textarea class="form-control" id="lessonMaterials" rows="4"></textarea>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save Lesson</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Add Grade Modal for Teacher -->
-          <div class="modal fade" id="addGradeModal" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addGradeModalLabel">Add New Grade</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="gradeStudent" class="form-label">Student</label>
-                      <select class="form-select" id="gradeStudent" required>
-                        <option value="" disabled selected>Select Student</option>
-                        <option value="Emily Rodriguez">Emily Rodriguez</option>
-                        <option value="David Miller">David Miller</option>
-                        <option value="Sarah Johnson">Sarah Johnson</option>
-                      </select>
-                    </div>
-                    <div class="mb-3">
-                      <label for="gradeAssignment" class="form-label">Assignment</label>
-                      <input type="text" class="form-control" id="gradeAssignment" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="gradeValue" class="form-label">Grade</label>
-                      <input type="text" class="form-control" id="gradeValue" required>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save Grade</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- New Message Modal for Teacher -->
-          <div class="modal fade" id="addMessageModal" tabindex="-1" aria-labelledby="addMessageModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addMessageModalLabel">New Message</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="messageRecipient" class="form-label">Recipient</label>
-                      <select class="form-select" id="messageRecipient" required>
-                        <option value="" disabled selected>Select Parent</option>
-                        <option value="Mrs. Rodriguez">Mrs. Rodriguez</option>
-                        <option value="Mr. Chen">Mr. Chen</option>
-                      </select>
-                    </div>
-                    <div class="mb-3">
-                      <label for="messageSubject" class="form-label">Subject</label>
-                      <input type="text" class="form-control" id="messageSubject" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="messageContent" class="form-label">Message</label>
-                      <textarea class="form-control" id="messageContent" rows="5" required></textarea>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Send Message</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Reply Message Modal for Teacher -->
-          <div class="modal fade" id="replyMessageModal" tabindex="-1" aria-labelledby="replyMessageModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="replyMessageModalLabel">Reply to Message</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="replyRecipient" class="form-label">Recipient</label>
-                      <input type="text" class="form-control" id="replyRecipient" readonly>
-                    </div>
-                    <div class="mb-3">
-                      <label for="replyContent" class="form-label">Reply</label>
-                      <textarea class="form-control" id="replyContent" rows="5" required></textarea>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Send Reply</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% } %>
-    </main>
-  </div>
-</div>
-
-<%- include('partials/footer.ejs'); %>
-
-<!-- Bootstrap JS Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // JavaScript to handle modal interactions (e.g., setting recipient for reply)
-  document.querySelectorAll('[data-bs-target="#replyMessageModal"]').forEach(button => {
-    button.addEventListener('click', function() {
-      const recipient = this.parentElement.querySelector('h6').textContent;
-      document.querySelector('#replyRecipient').value = recipient;
-    });
-  });
-</script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // JavaScript to handle modal interactions (e.g., setting recipient for reply)
+      document
+        .querySelectorAll('[data-bs-target="#replyMessageModal"]')
+        .forEach((button) => {
+          button.addEventListener("click", function () {
+            const recipient =
+              this.parentElement.querySelector("h6").textContent;
+            document.querySelector("#replyRecipient").value = recipient;
+          });
+        });
+    </script>
+  </body>
+</html>

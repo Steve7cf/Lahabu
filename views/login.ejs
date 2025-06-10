@@ -13,6 +13,11 @@
           </div>
 
           <div class="card-body p-4 p-md-5">
+            <div class="text-center">
+              <% if (feedback && feedback.length > 0) { %>
+              <div class="alert alert-<%= feedback[1] %>"><%= feedback[0] %></div>
+              <% } %>
+            </div>
             <!-- Role Selection Tabs -->
             <ul class="nav nav-pills nav-fill mb-4" id="loginRoleTabs" role="tablist">
               <li class="nav-item" role="presentation">

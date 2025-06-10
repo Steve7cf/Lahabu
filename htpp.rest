@@ -1,9 +1,19 @@
 
-POST http://localhost:3000/chats
+POST http://localhost:3000/student/grade
 Content-Type: application/json
 
 {
-    "sender":"steve bazaar",
-    "receiver":"john ellen",
-    "message":"hello teacher"
+    "studentId":"BCS/27012/2201/DT",
+    "subject":"biology",
+    "grade":"40",
+    "examType":"annual"
+}
+
+###
+POST http://localhost:3000/subject/add
+Content-Type: application/json
+
+{
+    "subject":"Displine",
+    "subjectTeacher":"chacha bazaar"
 }

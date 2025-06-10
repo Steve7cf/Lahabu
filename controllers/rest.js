@@ -4,6 +4,7 @@ const studentModel = require("../model/student");
 const parentModel = require("../model/parent");
 const teacherModel = require("../model/teacher");
 const messageModel = require("../model/messages");
+const gradeModel = require("../model/grade");
 
 // register student
 const registerStudent = async (req, res) => {
@@ -27,7 +28,13 @@ const registerStudent = async (req, res) => {
     !parentEmail ||
     !studentId
   ) {
-    return res.status(400).json({ message: "some fields are missing" });
+    req.flash("error", "All fields are required");
+    return res.status(401).redirect("/signup");
+  }
+
+  if (password !== confirmPassword) {
+    req.flash("error", "Passwords do not match");
+    return res.redirect("/register/student");
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -51,7 +58,8 @@ const registerStudent = async (req, res) => {
         .status(500)
         .json({ message: "Whoops! cant create account right now" });
 
-    res.status(201).redirect("/login");
+    req.flash("success", "Registration successful! Please login");
+    res.redirect("/login");
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ message: "Whoops! internal server Errors" });
@@ -140,7 +148,8 @@ const registerTeacher = async (req, res) => {
     !teacherId ||
     !role
   ) {
-    return res.status(400).json({ message: "some fields are missing" });
+    req.flash("info", ["some fields are missing", "warning"]);
+    return res.redirect("/login");
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -159,13 +168,16 @@ const registerTeacher = async (req, res) => {
     };
 
     const teacherRecords = await teacherModel.create(teacherObj);
-    if (!teacherRecords)
-      return res.status(500).json({ message: "Whoops! no records found!" });
+    if (!teacherRecords) {
+      req.flash("info", ["No taecher records found", "warning"]);
+      return res.redirect("/login");
+    }
 
     res.status(201).redirect("/login");
   } catch (error) {
     console.log(error.message);
-    return res.status(500).json({ message: "Whoops! internal server Errors" });
+    req.flash("info", ["Whoops! internal!", "danger"]);
+    return res.redirect("/login");
   }
 };
 
@@ -175,55 +187,48 @@ const authTeacher = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password || !role) {
-    return res.status(400).json({ message: "some fields are missing" });
-  }
-
-  if (!["student", "parent", "teacher"].includes(role)) {
-    return res.status(400).json({ message: "invalid role" });
+    req.flash("info", ["some fields are missing", "warning"]);
+    return res.redirect("/login");
   }
 
   try {
     const user = await teacherModel.findOne({ email: email, role: role });
 
     if (!user) {
-      return res.status(401).json({ message: "invalid email" });
+      req.flash("info", ["wrong credentials", "warning"]);
+      return res.redirect("/login");
     }
 
-    bcrypt.compare(password, user.password, (err, valid) => {
-      if (err) {
-        throw new Error(err);
-      }
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      req.flash("info", ["wrong password", "warning"]);
+      return res.redirect("/login");
+    }
 
-      if (!valid) {
-        return res.status(401).json({ message: "invalid password" });
-      }
+    req.session.user = {
+      id: user._id,
+      name: user.firstName,
+      role: user.role,
+      email: user.email,
+    };
 
-      if (valid) {
-        jwt.sign(
-          { id: user._id, name: user.firstName, role: user.role },
-          process.env.ACCESS_TOKEN,
-          { expiresIn: 60 * 60 * 1000 },
-          (err, token) => {
-            if (err) {
-              throw new Error(err);
-            }
+    const token = jwt.sign(
+      { id: user._id, name: user.firstName, role: user.role },
+      process.env.ACCESS_TOKEN,
+      { expiresIn: "1h" }
+    );
 
-            if (!token) {
-              return res.status(401).json({ message: "invalid password" });
-            }
-
-            if (token) {
-              res.cookie("token", token);
-
-              return res.status(200).redirect("/dashboard");
-            }
-          }
-        );
-      }
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 3600000, // 1 hour
     });
+
+    return res.status(200).redirect("/dashboard");
   } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ message: "server error" });
+    console.error(error.message);
+    req.flash("info", ["internal server error", "warning"]);
+    return res.redirect("/login");
   }
 };
 
@@ -231,14 +236,10 @@ const authTeacher = async (req, res) => {
 const authStudent = async (req, res) => {
   const role = "student";
   const { studentID, password } = req.body;
-  console.log(studentID);
 
   if (!studentID || !password || !role) {
-    return res.status(400).json({ message: "some fields are missing" });
-  }
-
-  if (!["student", "parent", "teacher"].includes(role)) {
-    return res.status(400).json({ message: "invalid role" });
+    req.flash("info", ["some fields are missing", "warning"]);
+    return res.redirect("/login");
   }
 
   try {
@@ -248,44 +249,41 @@ const authStudent = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(401).json({ message: "invalid student ID" });
+      req.flash("info", ["invalid student Id", "warning"]);
+      return res.redirect("/login");
     }
 
-    bcrypt.compare(password, user.password, (err, valid) => {
-      if (err) {
-        throw new Error(err);
-      }
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      req.flash("info", ["invalid password", "warning"]);
+      return res.status(401).redirect("/login");
+    }
 
-      if (!valid) {
-        return res.status(401).json({ message: "invalid password" });
-      }
+    // Store user in session
+    req.session.user = {
+      id: user._id,
+      studentId: user.studentId,
+      role: user.role,
+      name: `${user.firstName} ${user.lastName}`,
+    };
 
-      if (valid) {
-        jwt.sign(
-          { id: user._id, name: user.studentId, role: user.role },
-          process.env.ACCESS_TOKEN,
-          { expiresIn: 60 * 60 * 1000 },
-          (err, token) => {
-            if (err) {
-              throw new Error(err);
-            }
+    const token = jwt.sign(
+      { id: user._id, name: user.studentId, role: user.role },
+      process.env.ACCESS_TOKEN,
+      { expiresIn: "1h" }
+    );
 
-            if (!token) {
-              return res.status(401).json({ message: "invalid password" });
-            }
-
-            if (token) {
-              res.cookie("token", token);
-
-              return res.status(200).redirect("/dashboard");
-            }
-          }
-        );
-      }
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 3600000,
     });
+
+    return res.status(200).redirect("/dashboard");
   } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ message: "server error" });
+    console.error(error.message);
+    req.flash("info", ["whoops! internal server error", "warning"]);
+    return res.redirect("/login");
   }
 };
 
@@ -295,18 +293,21 @@ const authParent = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password || !role) {
-    return res.status(400).json({ message: "some fields are missing" });
+    req.flash("info", ["some fields are missing", "warning"]);
+    return res.redirect("/login");
   }
 
   if (!["student", "parent", "teacher"].includes(role)) {
-    return res.status(400).json({ message: "invalid role" });
+    req.flash("info", ["forbidden", "warning"]);
+    return res.status(403).redirect("/login");
   }
 
   try {
     const user = await parentModel.findOne({ email: email, role: role });
 
     if (!user) {
-      return res.status(401).json({ message: "invalid email" });
+      req.flash("info", ["invalid email", "warning"]);
+      return res.redirect("/login");
     }
 
     bcrypt.compare(password, user.password, (err, valid) => {
@@ -315,7 +316,8 @@ const authParent = async (req, res) => {
       }
 
       if (!valid) {
-        return res.status(401).json({ message: "invalid password" });
+        req.flash("info", ["invalid password", "warning"]);
+        return res.redirect("/login");
       }
 
       if (valid) {
@@ -329,7 +331,8 @@ const authParent = async (req, res) => {
             }
 
             if (!token) {
-              return res.status(401).json({ message: "invalid password" });
+              req.flash("info", ["invalid password", "warning"]);
+              return res.redirect("/login");
             }
 
             if (token) {
@@ -343,7 +346,8 @@ const authParent = async (req, res) => {
     });
   } catch (error) {
     console.log(error.message);
-    return res.status(500).json({ message: "server error" });
+    req.flash("info", ["internal server error", "warning"]);
+    return res.redirect("/login");
   }
 };
 
@@ -357,11 +361,38 @@ const chats = async (req, res) => {
       receiver: receiver,
     };
     const messageRec = await messageModel.create(messageObj);
-    if (!messageRec) return res.status(500).json({ message: "server error" });
-    res.status(201).json(messageRec)
+    if (!messageRec) {
+      req.flash("info", ["no messages", "warning"]);
+      return res.redirect("/dashboard");
+    }
+    res.status(201).json(messageRec);
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ message: "server error" });
+  }
+};
+
+const addGrade = async (req, res) => {
+  const { studentId, subject, grade, examType } = req.body;
+  console.log(studentId, subject, grade, examType);
+  if (!studentId || !subject || !grade || !examType) {
+    req.flash("info", ["some fields are missing", "warning"]);
+    return res.redirect("/dashboard");
+  }
+  try {
+    const gradeObj = {
+      studentId: studentId,
+      subject: subject,
+      grade: grade,
+      examType: examType,
+    };
+    const gradeRecords = await gradeModel.create(gradeObj);
+    if (!gradeRecords) req.flash("info", ["no Record", "warning"]);
+    return res.redirect("/dashboard");
+  } catch (error) {
+    console.log(error.message);
+    req.flash("info", ["internal server error", "warning"]);
+    return res.redirect("/logout");
   }
 };
 
@@ -373,4 +404,5 @@ module.exports = {
   authParent,
   authTeacher,
   chats,
+  addGrade,
 };

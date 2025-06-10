@@ -5,7 +5,8 @@ const authenticate = () => {
     const token = req.cookies.token;
 
     if (!token) {
-      return res.status(401).json({ message: "No  valid token found!" });
+      req.flash("info", ["no valid token", "warning"]);
+      return res.redirect("/login");
     }
 
     const data = jwt.verify(token, process.env.ACCESS_TOKEN);
